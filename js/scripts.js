@@ -10,40 +10,41 @@ CALCOLO DEL PREZZO DEL BIGLIETTO DEL TRENO
 //6.il prezzo finale va visualizzato NON con più di DUE decimali dopo la virgola
 
 //1.chiedo di inserire i km 
-const dist =parseInt (prompt('Inserire Distanza in KM'))
+const dist = parseInt(prompt('Inserire Distanza in KM'))
 console.log('KM', dist, typeof dist);
 
 //2.chiedo l'età
-const age =parseInt (prompt('Inserisci la tua età'))
+const age = parseInt(prompt('Inserisci la tua età'))
 console.log('anni', age, typeof age);
 
 //3.calcolo il totale del biglietto
-let biglietto = parseFloat (dist * 0.21)
+let biglietto = parseFloat(dist * 0.21)
 console.log('biglietto', biglietto, typeof biglietto);
 
+
 //4.applicare uno sconto del 20% SE minorenne
-let scontoMinore = parseFloat ((biglietto / 100) *20)
+let scontoMinore = parseFloat((biglietto / 100) * 20)
 console.log('scontoMinore', scontoMinore, typeof scontoMinore);
 
 //5.applicare sconto del 40% SE over65
-let scontoOver65 = parseFloat ((biglietto / 100) *40)
+let scontoOver65 = parseFloat((biglietto / 100) * 40)
 console.log('scontoOver65', scontoOver65, typeof scontoOver65);
 
-if (age >=18&&65) {
-    console.log('prezzo del biglietto'+ biglietto);
+//5.5 sconti applicati
+let bigliettoOver65 = parseFloat(biglietto - scontoOver65);
+let bigliettoMinore = parseFloat(biglietto - scontoMinore);
+
+//6. visualizzo il prezzo finale nel HTML in base all'età + sconto
+if (age >= 18 && age <= 65) {
+    console.log('prezzo del biglietto:' + biglietto);
+    document.getElementById('bilgietto-costo').innerHTML = biglietto;
 }
-else if (age >65){
-    console.log('prezzo del biglietto' + (biglietto - scontoOver65));
+else if (age > 65) {
+    console.log('biglietto over 65:' + bigliettoOver65);
+    document.getElementById('bilgietto-costo').innerHTML = bigliettoOver65;
 
 }
-
-else (age <18) {
-    console.log('prezzo del bilgietto' + (biglietto - scontoMinore));
-
+else {
+    console.log('biglietto minore:' + bigliettoMinore);
+    document.getElementById('bilgietto-costo').innerHTML = bigliettoMinore;
 }
-
-
-
-//6.inserisco il risultato nel HTML
-/*console.log('prezzo del biglietto:' + biglietto);
-document.getElementById('bilgietto-costo').innerHTML =
